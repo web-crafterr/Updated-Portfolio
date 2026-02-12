@@ -1,0 +1,1191 @@
+:root {
+    --bg-main: #ffffff;
+    /* Main background (near-black, not pure black) */
+    --text-primary: #000000;
+    /* Primary text (white) */
+    --text-secondary: #f5f821;
+    /* Secondary text (soft gray-white) */
+    --purple-main: #464EB8;
+    /* MS Teams purple (nav items, highlights) */
+    --purple-soft: #979bda;
+    /* Light purple shade for cards & boxes */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg-main);
+    color: var(--text-primary);
+        padding-top: 70px;
+
+}
+
+/* ================= LOGO ================= */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo a {
+    display: inline-flex;
+    align-items: center;
+    line-height: 0;
+}
+
+/* remove nav underline from logo only */
+.logo a::after {
+    display: none !important;
+}
+
+.logo img {
+    height: 60px;
+    width: 140px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* ================= NAV ================= */
+nav {
+    background: var(--purple-main);
+    padding: 5px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+      position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 50px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+nav a {
+    position: relative;
+    color: var(--bg-main);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 1px 0;
+}
+
+/* animated underline (kept as-is for nav items) */
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -3px;
+    width: 0;
+    height: 3px;
+    background: currentColor;
+    transform: translateX(-50%);
+    transition: all 0.35s ease;
+}
+
+nav a:hover::after,
+nav a:focus::after {
+    width: 120%;
+}
+
+/* ================= BUTTON ================= */
+.nav-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 100px;
+    background: var(--bg-main);
+    color: var(--text-primary);
+    cursor: pointer;
+    user-select: none;
+    overflow: hidden;
+    transition: all 0.35s ease;
+}
+
+/* button text */
+.btn-text {
+    display: inline-block;
+    white-space: nowrap;
+    transition: transform 0.35s ease;
+}
+
+/* arrow */
+.nav-btn .arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translate(10px, -50%) rotate(-45deg);
+    opacity: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--purple-soft);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 1;
+    transition: all 0.35s ease;
+    z-index: 1;
+}
+
+/* hover effects (unchanged behavior) */
+.nav-btn:hover {
+    padding-right: 60px;
+    background: var(--bg-main);
+    color: var(--text-primary);
+}
+
+.nav-btn:hover .btn-text {
+    transform: translateX(-10px);
+}
+
+.nav-btn:hover .arrow {
+    transform: translate(0, -50%) rotate(-45deg);
+    opacity: 1;
+    background: var(--text-primary);
+    color: var(--bg-main);
+
+    nav a.active::after {
+        width: 120%;
+        transition-delay: 0.1s;
+    }
+
+}
+
+/* ACTIVE NAV LINK */
+nav a.active::after {
+    width: 120%;
+}
+
+
+/* ================= NAV LOAD ANIMATION ================= */
+
+/* NAV LOAD WRAPPER ANIMATION */
+nav {
+    opacity: 0;
+    animation: navSlideDown 0.8s ease forwards;
+}
+
+@keyframes navSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Hide top elements initially */
+.logo,
+.nav-btn,
+nav ul li {
+    opacity: 0;
+    transform: translateY(-40px);
+}
+
+/* First wave (logo + button + first link) */
+nav.elements-show .logo,
+nav.elements-show .nav-btn,
+nav.elements-show ul li:first-child {
+    animation: dropDown 0.6s ease forwards;
+}
+
+/* First wave (logo + button + first link) */
+nav.elements-show .logo,
+nav.elements-show .nav-btn,
+nav.elements-show ul li:first-child {
+    animation: dropDown 0.6s ease forwards;
+}
+
+/* Stagger remaining nav links one by one */
+nav.elements-show ul li:nth-child(2) {
+    animation: dropDown 0.6s ease forwards;
+    animation-delay: 0.4s;
+}
+
+nav.elements-show ul li:nth-child(3) {
+    animation: dropDown 0.6s ease forwards;
+    animation-delay: 0.6s;
+}
+
+nav.elements-show ul li:nth-child(4) {
+    animation: dropDown 0.6s ease forwards;
+    animation-delay: 0.8s;
+}
+
+nav.elements-show ul li:nth-child(5) {
+    animation: dropDown 0.6s ease forwards;
+    animation-delay: 1s;
+}
+
+/* Drop animation */
+@keyframes dropDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.page {
+  max-width: 1400px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+.heading-container {
+  width: 100%;
+  padding: 100px 20px;
+  margin: 0 auto;
+  border-bottom:3px solid var(--text-primary);
+
+  /* Background layers: gradient on top, image in middle, fallback color at bottom */
+  background: 
+    linear-gradient(
+      135deg,
+      rgba(37, 99, 235, 0.4),
+      rgba(46, 85, 190, 0.4)
+    ),
+    url("./Assets/contact-hero.png"),
+    var(--purple-soft);
+
+  /* Control background behavior */
+  background-repeat: no-repeat, no-repeat, no-repeat; /* image won't repeat */
+  background-size: cover, cover, auto; /* image and gradient cover container */
+  background-position: center, center, top left; /* center image */
+
+/* background-color: var(--purple-soft); */
+
+  color: var(--text-primary);
+  width: 100%;
+  /* full width */
+  /* margin-top: 30px; */
+  padding: 150px 20px;
+  gap: 7px;
+  display: flex;
+  flex-direction: column;
+  /* stack h2 and p vertically */
+  align-items: center;
+  /* center horizontally */
+
+  text-align: center;
+  font-weight: 800;
+  /* center text */
+  border-radius: 10px;
+}
+
+.heading-container img {
+  padding: 100px auto;
+  margin-bottom: 5px;
+}
+
+
+.expect-section {
+  display: flex;
+  justify-content: flex-end;
+}
+
+h2 {
+  color: var(--text-primary);
+  font-size: 48px;
+}
+
+p {
+  color: var(--text-primary);
+  font-size: 22px;
+}
+
+/* ================= BUTTON ================= */
+.con-hero-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 100px;
+    background: var(--bg-main);
+    color: var(--text-primary);
+    cursor: pointer;
+    user-select: none;
+    overflow: hidden;
+    transition: all 0.35s ease;
+}
+
+/* button text */
+.btn-text {
+    display: inline-block;
+    white-space: nowrap;
+    transition: transform 0.35s ease;
+}
+
+/* arrow */
+.con-hero-btn .arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translate(10px, -50%) rotate(-45deg);
+    opacity: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--purple-soft);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 1;
+    transition: all 0.35s ease;
+    z-index: 1;
+}
+
+/* hover effects (unchanged behavior) */
+.con-hero-btn:hover {
+    padding-right: 60px;
+    background: var(--bg-main);
+    color: var(--text-primary);
+}
+
+.con-hero-btn:hover .btn-text {
+    transform: translateX(-10px);
+}
+
+.con-hero-btn:hover .arrow {
+    transform: translate(0, -50%) rotate(-45deg);
+    opacity: 1;
+    background: var(--text-primary);
+    color: var(--bg-main);
+
+    con-hero a.active::after {
+        width: 120%;
+        transition-delay: 0.1s;
+    }
+}
+
+/* ACTIVE NAV LINK */
+con-hero a.active::after {
+    width: 120%;
+}
+
+
+.btn{
+  text-decoration: none;
+  background-color: var(--text-primary);
+  color: var(--bg-main);
+}
+
+/* CSS */
+.hero-heading-wrapper {
+  background-color: var(--bg-main);      /* white background */
+  color: var(--text-primary);                 /* black text */
+  text-align: center;             /* center align */
+  padding: 70px 20px 0px 20px;
+  margin: 0px auto;
+  max-width: 800px;
+  border-radius: 10px;            /* subtle rounded corners */
+  
+}
+
+.hero-title {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #222222;                 /* softer black for subtitle */
+}
+
+/* ================= SMOOTH BOTTOM TO TOP ANIMATION ================= */
+
+@keyframes smoothUp {
+  from {
+    opacity: 0;
+    transform: translateY(70px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply animation */
+.heading-container,
+.heading-container img,
+.heading-container h2,
+.heading-container p,
+.expect-section,
+.con-hero-btn,
+.hero-heading-wrapper,
+.hero-title,
+.hero-subtitle {
+  opacity: 0;
+  animation: smoothUp 1.2s ease forwards;
+}
+
+/* Optional smooth stagger delays */
+.heading-container { animation-delay: 0.2s; }
+.heading-container h2 { animation-delay: 0.4s; }
+.heading-container p { animation-delay: 0.6s; }
+.con-hero-btn { animation-delay: 0.8s; }
+.hero-heading-wrapper { animation-delay: 1s; }
+.hero-title { animation-delay: 1.2s; }
+.hero-subtitle { animation-delay: 1.4s; }
+
+
+/* MAIN SECTION */
+.contact-section {
+  margin-top: 30px;
+  padding: 50px 0;
+  background-color: var(--purple-soft);
+}
+
+.contact-wrapper {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  gap: 30px;
+}
+
+/* LEFT SIDE */
+.contact-left {
+  width: 60%;
+}
+
+.contact-left h2 {
+  font-size: 42px;
+  font-weight: 600;
+}
+
+.heading-line {
+  width: 30%;
+  height: 4px;
+  background: var(--text-primary);
+  margin: 12px 0 24px;
+}
+
+
+
+.contact-left p {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--text-primary);
+  max-width: 90%;
+
+}
+
+/* Parent container */
+.contact-icons-container {
+  display: flex;
+  justify-content: left;
+  /* center horizontally */
+  gap: 70px;
+  /* space between each box */
+  margin-top: 50px;
+  flex-wrap: wrap;
+  /* wraps on smaller screens */
+}
+
+/* Individual box */
+.contact-icon-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 150px;
+  transition: transform 0.3s;
+}
+
+.contact-icon-box:hover {
+  transform: translateY(-5px);
+  /* subtle lift on hover */
+}
+
+/* Round icon circle */
+.icon-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--bg-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.icon-circle img {
+  width: 40px;
+  height: 40px;
+}
+
+/* Hover effect for icon circle */
+.contact-icon-box:hover .icon-circle {
+  background: var(--purple-main);
+  /* change background color */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.contact-icon-box:hover .icon-circle img {
+  filter: brightness(0) invert(1);
+  /* icon turns white */
+}
+
+/* Headings & text */
+.contact-icon-box h3 {
+  font-size: 18px;
+  margin: 0px 0;
+  text-align: center;
+}
+
+
+.contact-icon-box p {
+  font-size: 12px;
+  color: var(--text-primary);
+  text-align: center;
+
+}
+
+
+/* RIGHT SIDE */
+.contact-right {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0px 10px;
+  padding-top: 50px;
+}
+
+/* CARD */
+.info-card {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--bg-main);
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* 20% IMAGE */
+.card-icon {
+  width: 20%;
+}
+
+.card-icon img {
+  width: 100%;
+  height: 110px;
+  border-radius: 10px;
+}
+
+/* 80% CONTENT */
+.card-content {
+  width: 80%;
+}
+
+
+.contact-heading {
+  padding: 15px 0;
+  text-align: left;
+}
+
+h4 {
+  text-align: left;
+  color: var(--purple-main);
+  padding-bottom: 6px;
+  padding-top: 15px;
+
+}
+
+h3 {
+  font-size: 30px;
+  text-align: center;
+}
+
+.input-container {
+  padding: 10px 20px;
+}
+
+.card-content h4 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--purple-main);
+}
+
+.card-content p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  padding-right: 10px;
+}
+
+/* ================= SCROLL TRIGGER ANIMATION ================= */
+
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Initial hidden state */
+.contact-left,
+.contact-right {
+  opacity: 0;
+}
+
+/* When visible */
+.contact-left.show {
+  animation: slideFromLeft 1s ease forwards;
+}
+
+.contact-right.show {
+  animation: slideFromRight 1s ease forwards;
+}
+
+/* BOTTOM */
+.bottom {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  width: 1400px;
+  max-width: 1400px;
+}
+
+.contact-heading h4 {
+  text-align: center;
+}
+
+.contact,
+.comments {
+  background: var(--purple-soft);
+  /* padding: 30px; */
+  border-radius: 18px;
+}
+
+.comments {
+  width: 100%;
+  /* container full width */
+  height: 100%;
+  /* set your desired height */
+  position: relative;
+  /* optional, if you want absolute positioning inside */
+  overflow: hidden;
+  /* hide any overflow */
+}
+
+.comments img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* makes image cover container without distortion */
+  display: block;
+  /* removes any default inline spacing */
+}
+
+input,
+textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.40);
+  border: none;
+  border-radius: 10px;
+  padding: 15px 14px;
+  margin: 10px 0;
+  color: var(--text-primary);
+}
+
+.input-container ::placeholder {
+  color: var(--text-primary);
+}
+
+textarea {
+  resize: none;
+  height: 90px;
+}
+
+/* ===== Scroll Animation Base State ===== */
+
+.scroll-left,
+.scroll-right {
+  opacity: 0;
+  transition: all 1s ease;
+}
+
+.scroll-left {
+  transform: translateX(-100px);
+}
+
+.scroll-right {
+  transform: translateX(100px);
+}
+
+/* When active */
+.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+/* =========================
+   CSS AUTO CONFIRMATION
+========================= */
+.confirmation-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease;
+  z-index: 9999;
+}
+
+.confirmation-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.confirmation-box {
+  background: var(--bg-main);
+  padding: 30px 40px;
+  border-radius: 18px;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+}
+
+.confirmation-box h4 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.confirmation-box p {
+  font-size: 15px;
+  opacity: 0.85;
+  margin-bottom: 20px;
+}
+
+.confirmation-box button {
+padding: 10px 20px;
+width: 100px;
+font-size: 18px;
+color: var(--text-primary);
+background-color: var(--purple-main);
+}
+
+
+.socials {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.socials span {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 12px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+
+
+.btn-primary-full {
+  padding: 10px 20px;
+  margin-bottom: 5px;
+  color: var(--bg-main);
+  /* text color */
+  background-color: var(--purple-main);
+  /* button color */
+  border-radius: 20px;
+  border: 1px solid var(--text-primary);
+  display: block;
+  /* needed for margin auto */
+  margin: 20px auto;
+  /* centers button horizontally */
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  /* smooth hover transition */
+  text-align: center;
+}
+
+/* Hover effect: invert colors */
+.btn-primary-full:hover {
+  background-color: var(--bg-main);
+  /* background becomes text color */
+  color: var(--purple-main);
+  /* text becomes original background */
+  border-color: var(--purple-main);
+  /* optional: change border color on hover */
+}
+
+
+/* ================= FAQ SECTION STYLING ================= */
+.faq-section {
+ background: 
+    linear-gradient(
+      135deg,
+      rgba(37, 99, 235, 0.3),
+      rgba(46, 85, 190, 0.3)
+    ),
+    url("./Assets/lines-pattern.png") repeat,
+    var(--purple-soft);
+
+  background-blend-mode: overlay; /* makes gradient + image blend nicely */
+  backdrop-filter: blur(80px);     /* subtle glassy blur */
+  -webkit-backdrop-filter: blur(8px);
+
+  padding: 60px 20px;
+  margin: 20px auto 30px;
+
+  border-radius: 16px; /* optional, makes it look smoother */
+}
+
+.faq-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.faq-section h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.faq-subheading {
+  text-align: center;
+  font-size: 16px;
+  color: var(--text-primary);
+  margin-bottom: 40px;
+}
+
+/* FAQ Item */
+.faq-item {
+  border: 1px solid var(--bg-main);
+  border-radius: 10px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  background-color: var(--bg-main);
+  transition: box-shadow 0.3s ease;
+}
+
+.faq-item:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* Question Button */
+.faq-question {
+  width: 100%;
+  text-align: left;
+  padding: 18px 20px;
+  font-size: 18px;
+  font-weight: 500;
+  background-color: var(--bg-main);
+  border: none;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.faq-question:hover {
+  background-color: var(--purple-soft);
+}
+
+/* Arrow at start */
+.faq-arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  font-size: 20px;
+  margin-right: 10px;
+  color: var(--purple-main);
+}
+
+/* Rotate arrow when active */
+.faq-item.active .faq-arrow {
+  transform: rotate(90deg);
+}
+
+/* Answer */
+.faq-answer {
+  height: 0;
+  /* important for smooth transition */
+  overflow: hidden;
+  transition: height 0.35s ease;
+  padding: 0 20px;
+  background-color: var(--accent-color);
+  border-radius: 15px;
+  /* border: solid 1px var(--text-primary); */
+}
+
+.faq-answer p {
+  margin: 0 20px;
+  font-size: 16px;
+  padding: 15px 0;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+/* ================= FAQ FINAL SCROLL ANIMATION ================= */
+
+/* From Top */
+@keyframes slideFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-70px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* From Bottom */
+@keyframes slideFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(70px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Initial hidden state */
+.faq-section h2,
+.faq-subheading,
+.faq-item {
+  opacity: 0;
+}
+
+/* When visible */
+.faq-section h2.show-heading,
+.faq-subheading.show-subheading {
+  animation: slideFromTop 1s ease forwards;
+}
+
+.faq-item.show-card {
+  animation: slideFromBottom 0.8s ease forwards;
+}
+
+/* Show answer when active by setting height in JS */
+
+/* ================= FOOTER ================= */
+.site-footer {
+  background: var(--purple-main);
+  /* deep slate */
+  color: var(--bg-main);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* MAIN GRID */
+.footer-container {
+  max-width: 1400px;
+  margin: auto;
+  padding: 50px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 50px;
+}
+
+/* BRAND */
+.footer-col.brand {
+  text-align: center;
+}
+
+.footer-col.brand h3 {
+  font-size: 26px;
+  color: var(--bg-main);
+  margin-bottom: 15px;
+}
+
+.footer-col.brand p {
+  line-height: 1.7;
+  font-size: 15px;
+  color: var(--bg-main);
+  max-width: 320px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+
+/* HEADINGS */
+.footer-col h4 {
+  color: var(--bg-main);
+  font-size: 22px;
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.footer-col h4 {
+  display: inline-block;
+}
+
+.footer-col h4::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: var(--text-secondary);
+  margin-top: 6px;
+  border-radius: 2px;
+}
+
+/* LISTS */
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 12px;
+}
+
+.footer-col a {
+  color: var(--bg-main);
+  text-decoration: none;
+  font-size: 18px;
+  padding-left: 20px;
+  transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer-col a:hover {
+  color: var(--text-primary);
+  padding-left: 4px;
+}
+
+/* SOCIAL */
+.social-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.footer-icon{
+  height: 25px;
+}
+
+/* BOTTOM */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  text-align: center;
+  padding: 20px;
+background: linear-gradient(135deg, #3f4881, #1d2549); /* Dark bluish-gray gradient */
+  font-size: 12px;
+  color: var(--text-primary);
+}
+
+.footer-bottom p {
+  color: var(--text-primary);
+  font-size: 16px;
+}
+
+
+/* ================= FOOTER ANIMATION ================= */
+
+/* Initial state */
+.footer-container {
+  opacity: 0;
+  transform: translateY(120px);
+  transition: transform 0.9s ease, opacity 0.9s ease;
+}
+
+/* When container becomes visible */
+.footer-container.show-container {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hide inner content initially */
+.footer-col > * {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* Animate inner content */
+.footer-container.show-content .footer-col > * {
+  animation: footerFadeUp 0.6s ease forwards;
+}
+
+/* Delay effect (one by one inside each column) */
+.footer-container.show-content .footer-col > *:nth-child(1) { animation-delay: 0.2s; }
+.footer-container.show-content .footer-col > *:nth-child(2) { animation-delay: 0.4s; }
+.footer-container.show-content .footer-col > *:nth-child(3) { animation-delay: 0.6s; }
+.footer-container.show-content .footer-col > *:nth-child(4) { animation-delay: 0.8s; }
+.footer-container.show-content .footer-col > *:nth-child(5) { animation-delay: 1s; }
+
+@keyframes footerFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
