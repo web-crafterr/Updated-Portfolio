@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
        harvest: {
       title: "Hope Harvest",
       description: "Harvest Hope Food Bank is a static non-profit website designed to communicate the organization’s mission, impact, and community efforts through clear and meaningful content.",
-      image: "Assets/Harvesthope.png",
+      image: "./Assets/Harvesthope.png",
       live: "https://harvest-hope-production-test.netlify.app/",
       github: "https://github.com/web-crafterr",
       technologies: ["Figma", "HTML", "CSS", "JavaScript", "Netlify", "GitHub"],
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     WanderEscape: {
       title: "Wander Escape",
       description: "WanderEscape is a static travel website created to showcase destinations and travel inspiration. It focuses on visual presentation and structured content to highlight travel experiences.",
-      image: "Assets/Wanderscape.png",
+      image: "./Assets/Wanderscape.png",
       live: "https://studio7287.wordpress.com/",
       github: "https://github.com/web-crafterr",
       technologies: ["Figma", "WordPress"],
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
  figma: {
       title: "Figma Designs",
       description: "A collection of static UI/UX design projects created in Figma, showcasing layout design, visual hierarchy, and interface concepts for web and mobile applications.",
-      image: "Assets/figma.png",
+      image: "./Assets/figma.png",
       live: "https://drive.google.com/drive/folders/1cbe9yWwqB2ruyj9wC7lDmUBLhdlLC-qV?usp=sharing",
       github: "https://github.com/web-crafterr",
       technologies: ["Figma", "UI/UX Design"],
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     gis: {
       title: "GIS Project",
       description: "This GIS project involves analyzing and visualizing geographic data to study spatial patterns and relationships. It focuses on map creation, data interpretation, and presenting analytical results rather than web development.",
-      image: "Assets/Gis.png",
+      image: "./Assets/Gis.png",
       live: "https://arcg.is/1GimOK1",
       github: "https://github.com/web-crafterr",
       technologies: ["ARC-Gis"],
@@ -230,6 +230,7 @@ faqItems.forEach(item => {
     }
   });
 });
+
 
 
 
