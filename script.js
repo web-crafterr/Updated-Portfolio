@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     history: {
       title: "Echoes of History",
       description: "Echoes of History is an educational and visually immersive website focused on ancient civilizations. It presents historical timelines, cultural insights, and iconic landmarks in a structured and engaging way, making history easy to explore for students and enthusiasts alike.",
-      image: "/Assets/Echoesofhistory.png",
+      image: "Assets/Echoesofhistory.png",
       live: "https://echoes-of-history-pesonal-website.netlify.app/",
       github: "https://github.com/web-crafterr",
       technologies: ["Figma", "HTML", "CSS", "JavaScript", "Netlify", "GitHub"],
@@ -232,6 +232,7 @@ faqItems.forEach(item => {
     }
   });
 });
+
 
 
 
